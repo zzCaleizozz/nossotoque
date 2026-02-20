@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Toque para sentir meu coração pulsar por você❤️</title>
+    <link rel="icon" href="https://fav.farm/❤️" />
+    <style>
+        body {
+            margin: 0; padding: 0; height: 100vh;
+            display: flex; justify-content: center; align-items: center;
+            background: linear-gradient(135deg, #2ecc71, #f39c12);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            overflow: hidden; touch-action: none;
+        }
+        .instrucao {
+            color: white; text-align: center; pointer-events: none;
+            position: absolute; z-index: 1; text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .coracao-elemento {
+            position: absolute; width: 40px; height: 40px;
+            background-color: white; transform: translate(-50%, -50%) rotate(45deg);
+            pointer-events: none; animation: subir 1s ease-out forwards;
+        }
+        .coracao-elemento::before, .coracao-elemento::after {
+            content: ''; width: 40px; height: 40px;
+            background-color: white; border-radius: 50%; position: absolute;
+        }
+        .coracao-elemento::before { left: -20px; }
+        .coracao-elemento::after { top: -20px; }
+        @keyframes subir {
+            0% { transform: translate(-50%, -50%) rotate(45deg) scale(0.5); opacity: 1; }
+            100% { transform: translate(-50%, -150%) rotate(45deg) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="instrucao">
+        <h1>Sinta meu carinho</h1>
+        <p>Toque na tela... 💚🧡</p>
+    </div>
+    <audio id="som" src="https://www.soundjay.com/button/sounds/button-20.mp3" preload="auto"></audio>
+    <script>
+        function soltarCoracao(x, y) {
+            const audio = document.getElementById('som');
+            audio.currentTime = 0; audio.play().catch(() => {});
+            const cor = document.createElement('div');
+            cor.className = 'coracao-elemento';
+            cor.style.left = x + 'px'; cor.style.top = y + 'px';
+            document.body.appendChild(cor);
+            setTimeout(() => { cor.remove(); }, 1000);
+        }
+        document.addEventListener('touchstart', (e) => { soltarCoracao(e.touches[0].clientX, e.touches[0].clientY); });
+        document.addEventListener('mousedown', (e) => { soltarCoracao(e.clientX, e.clientY); });
+    </script>
+</body>
+</html>
